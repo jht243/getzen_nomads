@@ -21,6 +21,7 @@ from sqlalchemy import (
 )
 from sqlalchemy import inspect as sa_inspect, text as sa_text
 from sqlalchemy.orm import declarative_base, sessionmaker, relationship
+from sqlalchemy.pool import NullPool
 
 from src.config import settings
 
@@ -389,7 +390,12 @@ class ScrapeLog(Base):
 # DB bootstrap
 # ─────────────────────────────────────────────────────────────────────────
 
-engine = create_engine(settings.database_url, echo=False)
+_pool_class = NullPool if "pooler.supabase.com" in settings.database_url else None
+engine = create_engine(
+    settings.database_url,
+    echo=False,
+    **({"poolclass": _pool_class} if _pool_class else {}),
+)
 SessionLocal = sessionmaker(bind=engine)
 _init_lock = Lock()
 _db_initialized = False

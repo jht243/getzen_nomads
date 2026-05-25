@@ -1,0 +1,65 @@
+services:
+  - type: web
+    name: getzen-nomads
+    runtime: docker
+    repo: https://github.com/jht243/getzen_nomads
+    branch: main
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
+      - key: SUPABASE_REPORT_BUCKET
+        value: reports
+      - key: SITE_URL
+        value: https://www.getzen.cash
+      - key: SITE_NAME
+        value: Get ZEN
+      - key: SERVER_PORT
+        value: "8080"
+      - key: LOG_LEVEL
+        value: INFO
+      - key: INDEXNOW_KEY
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: BUTTONDOWN_API_KEY
+        sync: false
+
+  - type: cron
+    name: getzen-daily-pipeline
+    runtime: docker
+    repo: https://github.com/jht243/getzen_nomads
+    branch: main
+    plan: starter
+    schedule: "0 10 * * *"
+    dockerCommand: python run_daily.py
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
+      - key: SUPABASE_REPORT_BUCKET
+        value: reports
+      - key: SITE_URL
+        value: https://www.getzen.cash
+      - key: SITE_NAME
+        value: Get ZEN
+      - key: LOG_LEVEL
+        value: INFO
+      - key: INDEXNOW_KEY
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: BUTTONDOWN_API_KEY
+        sync: false

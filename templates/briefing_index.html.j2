@@ -1,0 +1,45 @@
+{% extends "_base.html.j2" %}
+
+{% block page_hero %}
+<section class="page-hero-strip">
+  <div class="page-hero-inner">
+    <div class="page-hero-eyebrow">Daily briefings</div>
+    <h1 class="page-hero-title">Daily digital nomad briefings.</h1>
+    <p class="page-hero-subtitle">Visa changes, cost shifts, safety alerts, and crypto regulation — twice daily.</p>
+  </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<main class="container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>›</span><span>Briefings</span>
+  </nav>
+
+  {% if posts %}
+  <div class="index-grid">
+    {% for p in posts %}
+    <article class="index-card">
+      <a class="card-link" href="/briefings/{{ p.slug }}" aria-label="{{ p.title|e }}">{{ p.title|e }}</a>
+      <a class="title-link" href="/briefings/{{ p.slug }}">{{ p.title }}</a>
+      <div class="meta">
+        {{ p.published_date.strftime('%b %d, %Y') }}{% if p.country_name %} · {{ p.country_name }}{% endif %}{% if p.topic_name %} · {{ p.topic_name }}{% endif %}
+      </div>
+      <p class="summary">{{ p.summary or p.subtitle or '' }}</p>
+    </article>
+    {% endfor %}
+  </div>
+
+  {% if pagination %}
+  <nav class="pagination" aria-label="Pagination">
+    {% if pagination.prev %}<a class="pagination-link" href="{{ pagination.prev }}" rel="prev">← Newer</a>{% else %}<span class="pagination-link disabled">← Newer</span>{% endif %}
+    <span class="pagination-info">Page {{ pagination.page }} of {{ pagination.pages }}</span>
+    {% if pagination.next %}<a class="pagination-link" href="{{ pagination.next }}" rel="next">Older →</a>{% else %}<span class="pagination-link disabled">Older →</span>{% endif %}
+  </nav>
+  {% endif %}
+
+  {% else %}
+  <p style="margin: 40px 0; color: var(--sr-gray-text);">No briefings yet — the daily pipeline runs at 14:00 and 21:00 UTC. Check back soon.</p>
+  {% endif %}
+</main>
+{% endblock %}

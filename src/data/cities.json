@@ -1,0 +1,80 @@
+[
+  {"country_slug": "colombia",  "slug": "medellin",      "name": "Medellín",       "lat": 6.2442,  "lon": -75.5812},
+  {"country_slug": "colombia",  "slug": "bogota",        "name": "Bogotá",         "lat": 4.7110,  "lon": -74.0721},
+  {"country_slug": "colombia",  "slug": "cartagena",     "name": "Cartagena",      "lat": 10.3910, "lon": -75.4794},
+
+  {"country_slug": "argentina", "slug": "buenos-aires",  "name": "Buenos Aires",   "lat": -34.6037, "lon": -58.3816},
+  {"country_slug": "argentina", "slug": "cordoba",       "name": "Córdoba",        "lat": -31.4201, "lon": -64.1888},
+  {"country_slug": "argentina", "slug": "mendoza",       "name": "Mendoza",        "lat": -32.8895, "lon": -68.8458},
+
+  {"country_slug": "el-salvador", "slug": "san-salvador","name": "San Salvador",   "lat": 13.6929, "lon": -89.2182},
+  {"country_slug": "el-salvador", "slug": "el-zonte",    "name": "El Zonte",       "lat": 13.4956, "lon": -89.4378},
+
+  {"country_slug": "venezuela", "slug": "caracas",       "name": "Caracas",        "lat": 10.4806, "lon": -66.9036},
+
+  {"country_slug": "paraguay",  "slug": "asuncion",      "name": "Asunción",       "lat": -25.2637, "lon": -57.5759},
+  {"country_slug": "paraguay",  "slug": "encarnacion",   "name": "Encarnación",    "lat": -27.3389, "lon": -55.8675},
+
+  {"country_slug": "ecuador",   "slug": "quito",         "name": "Quito",          "lat": -0.1807, "lon": -78.4678},
+  {"country_slug": "ecuador",   "slug": "cuenca",        "name": "Cuenca",         "lat": -2.9001, "lon": -79.0059},
+
+  {"country_slug": "serbia",    "slug": "belgrade",      "name": "Belgrade",       "lat": 44.7866, "lon": 20.4489},
+  {"country_slug": "serbia",    "slug": "novi-sad",      "name": "Novi Sad",       "lat": 45.2671, "lon": 19.8335},
+
+  {"country_slug": "montenegro","slug": "podgorica",     "name": "Podgorica",      "lat": 42.4304, "lon": 19.2594},
+  {"country_slug": "montenegro","slug": "kotor",         "name": "Kotor",          "lat": 42.4247, "lon": 18.7712},
+
+  {"country_slug": "albania",   "slug": "tirana",        "name": "Tirana",         "lat": 41.3275, "lon": 19.8189},
+  {"country_slug": "albania",   "slug": "saranda",       "name": "Saranda",        "lat": 39.8754, "lon": 20.0050},
+
+  {"country_slug": "croatia",   "slug": "split",         "name": "Split",          "lat": 43.5081, "lon": 16.4402},
+  {"country_slug": "croatia",   "slug": "zagreb",        "name": "Zagreb",         "lat": 45.8150, "lon": 15.9819},
+
+  {"country_slug": "north-macedonia", "slug": "skopje",  "name": "Skopje",         "lat": 41.9981, "lon": 21.4254},
+  {"country_slug": "north-macedonia", "slug": "ohrid",   "name": "Ohrid",          "lat": 41.1172, "lon": 20.8019},
+
+  {"country_slug": "georgia",   "slug": "tbilisi",       "name": "Tbilisi",        "lat": 41.7151, "lon": 44.8271},
+  {"country_slug": "georgia",   "slug": "batumi",        "name": "Batumi",         "lat": 41.6168, "lon": 41.6367},
+
+  {"country_slug": "uzbekistan","slug": "tashkent",      "name": "Tashkent",       "lat": 41.2995, "lon": 69.2401},
+  {"country_slug": "uzbekistan","slug": "samarkand",     "name": "Samarkand",      "lat": 39.6542, "lon": 66.9597},
+
+  {"country_slug": "kazakhstan","slug": "almaty",        "name": "Almaty",         "lat": 43.2220, "lon": 76.8512},
+  {"country_slug": "kazakhstan","slug": "astana",        "name": "Astana",         "lat": 51.1605, "lon": 71.4704},
+
+  {"country_slug": "kyrgyzstan","slug": "bishkek",       "name": "Bishkek",        "lat": 42.8746, "lon": 74.5698},
+
+  {"country_slug": "mongolia",  "slug": "ulaanbaatar",   "name": "Ulaanbaatar",    "lat": 47.8864, "lon": 106.9057},
+
+  {"country_slug": "vietnam",   "slug": "da-nang",       "name": "Da Nang",        "lat": 16.0544, "lon": 108.2022},
+  {"country_slug": "vietnam",   "slug": "hoi-an",        "name": "Hoi An",         "lat": 15.8801, "lon": 108.3380},
+  {"country_slug": "vietnam",   "slug": "dalat",         "name": "Da Lat",         "lat": 11.9404, "lon": 108.4583},
+
+  {"country_slug": "thailand",  "slug": "chiang-rai",    "name": "Chiang Rai",     "lat": 19.9105, "lon": 99.8406},
+  {"country_slug": "thailand",  "slug": "pai",           "name": "Pai",            "lat": 19.3590, "lon": 98.4368},
+
+  {"country_slug": "indonesia", "slug": "ubud",          "name": "Ubud",           "lat": -8.5069, "lon": 115.2625},
+  {"country_slug": "indonesia", "slug": "sidemen",       "name": "Sidemen",        "lat": -8.4719, "lon": 115.4525},
+  {"country_slug": "indonesia", "slug": "amed",          "name": "Amed",           "lat": -8.3403, "lon": 115.6612},
+
+  {"country_slug": "malaysia",  "slug": "penang",        "name": "Penang",         "lat": 5.4145,  "lon": 100.3292},
+  {"country_slug": "malaysia",  "slug": "langkawi",      "name": "Langkawi",       "lat": 6.3236,  "lon": 99.8508},
+
+  {"country_slug": "barbados",  "slug": "bridgetown",    "name": "Bridgetown",     "lat": 13.0975, "lon": -59.6167},
+  {"country_slug": "barbados",  "slug": "holetown",      "name": "Holetown",       "lat": 13.1833, "lon": -59.6333},
+
+  {"country_slug": "dominica",  "slug": "roseau",        "name": "Roseau",         "lat": 15.3017, "lon": -61.3873},
+  {"country_slug": "dominica",  "slug": "portsmouth",    "name": "Portsmouth",     "lat": 15.5856, "lon": -61.4595},
+
+  {"country_slug": "mauritius", "slug": "port-louis",    "name": "Port Louis",     "lat": -20.1609, "lon": 57.5012},
+  {"country_slug": "mauritius", "slug": "grand-baie",    "name": "Grand Baie",     "lat": -20.0084, "lon": 57.5808},
+
+  {"country_slug": "namibia",   "slug": "windhoek",      "name": "Windhoek",       "lat": -22.5597, "lon": 17.0832},
+  {"country_slug": "namibia",   "slug": "swakopmund",    "name": "Swakopmund",     "lat": -22.6792, "lon": 14.5272},
+
+  {"country_slug": "cape-verde","slug": "praia",         "name": "Praia",          "lat": 14.9215, "lon": -23.5087},
+  {"country_slug": "cape-verde","slug": "mindelo",       "name": "Mindelo",        "lat": 16.8866, "lon": -24.9881},
+
+  {"country_slug": "kenya",     "slug": "nairobi",       "name": "Nairobi",        "lat": -1.2921, "lon": 36.8219},
+  {"country_slug": "kenya",     "slug": "mombasa",       "name": "Mombasa",        "lat": -4.0435, "lon": 39.6682}
+]

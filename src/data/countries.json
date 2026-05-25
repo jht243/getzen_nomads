@@ -1,0 +1,262 @@
+[
+  {
+    "slug": "colombia",
+    "name": "Colombia",
+    "iso_code": "COL",
+    "region": "latin-america",
+    "currency": "COP",
+    "languages": ["es"],
+    "nomad_visa_available": true,
+    "summary": "Colombia's digital nomad visa (Visa V) and Medellín's eternal spring climate made it a Latin American favorite — but cost, safety, and visa-renewal mechanics shift fast."
+  },
+  {
+    "slug": "argentina",
+    "name": "Argentina",
+    "iso_code": "ARG",
+    "region": "latin-america",
+    "currency": "ARS",
+    "languages": ["es"],
+    "nomad_visa_available": true,
+    "summary": "Argentina's chronic inflation paired with the blue dollar makes Buenos Aires one of the cheapest world-class cities for remote workers willing to navigate parallel exchange rates."
+  },
+  {
+    "slug": "el-salvador",
+    "name": "El Salvador",
+    "iso_code": "SLV",
+    "region": "latin-america",
+    "currency": "USD",
+    "languages": ["es"],
+    "nomad_visa_available": true,
+    "summary": "Bitcoin as legal tender, a friendly Bitcoin Country freedom visa, and the safest country in Latin America — a unique stack for crypto-native remote workers."
+  },
+  {
+    "slug": "venezuela",
+    "name": "Venezuela",
+    "iso_code": "VEN",
+    "region": "latin-america",
+    "currency": "VES",
+    "languages": ["es"],
+    "nomad_visa_available": false,
+    "summary": "Off the standard nomad trail, but the dollarized economy and recovering Caracas tech scene attract a niche crowd. Practical intelligence is hard to find — and worth more here than anywhere."
+  },
+  {
+    "slug": "paraguay",
+    "name": "Paraguay",
+    "iso_code": "PRY",
+    "region": "latin-america",
+    "currency": "PYG",
+    "languages": ["es"],
+    "nomad_visa_available": false,
+    "summary": "Asunción is the cheapest Latin American capital — sub-$1k/mo budgets are realistic. Paraguay's 10% flat tax and easy residency draw crypto founders and long-haul nomads."
+  },
+  {
+    "slug": "ecuador",
+    "name": "Ecuador",
+    "iso_code": "ECU",
+    "region": "latin-america",
+    "currency": "USD",
+    "languages": ["es"],
+    "nomad_visa_available": true,
+    "summary": "Fully dollarized, with a Rentista visa under $1,300/mo and cheap healthcare. Cuenca is the long-term-expat capital; Quito gives big-city access at altitude."
+  },
+  {
+    "slug": "serbia",
+    "name": "Serbia",
+    "iso_code": "SRB",
+    "region": "balkans",
+    "currency": "RSD",
+    "languages": ["sr"],
+    "nomad_visa_available": false,
+    "summary": "No formal nomad visa, but a generous 90-day visa-free policy plus a fast Belgrade-based registration route make Serbia a Balkans hub for crypto founders and remote tech workers."
+  },
+  {
+    "slug": "montenegro",
+    "name": "Montenegro",
+    "iso_code": "MNE",
+    "region": "balkans",
+    "currency": "EUR",
+    "languages": ["sr"],
+    "nomad_visa_available": true,
+    "summary": "Montenegro's digital nomad visa, 9% flat tax route, and Adriatic coast give it a compelling profile — but infrastructure and banking are uneven."
+  },
+  {
+    "slug": "albania",
+    "name": "Albania",
+    "iso_code": "ALB",
+    "region": "balkans",
+    "currency": "ALL",
+    "languages": ["sq"],
+    "nomad_visa_available": true,
+    "summary": "One-year visa-free entry for Americans, low cost of living, and a Unique Permit for nomads. Tirana and Saranda are quietly building out coworking and long-stay infrastructure."
+  },
+  {
+    "slug": "croatia",
+    "name": "Croatia",
+    "iso_code": "HRV",
+    "region": "eastern-europe",
+    "currency": "EUR",
+    "languages": ["hr"],
+    "nomad_visa_available": true,
+    "summary": "The Digital Nomad Residence Permit gives a year in the EU on the Adriatic coast. Split and Zagreb have the strongest year-round communities; EUR pricing keeps things honest."
+  },
+  {
+    "slug": "north-macedonia",
+    "name": "North Macedonia",
+    "iso_code": "MKD",
+    "region": "eastern-europe",
+    "currency": "MKD",
+    "languages": ["mk"],
+    "nomad_visa_available": false,
+    "summary": "Skopje is the cheapest Balkans-adjacent capital with a freelancer-friendly tax regime. EU-accession track adds slow upside; 1 Gb fiber and a quiet expat community add immediate value."
+  },
+  {
+    "slug": "georgia",
+    "name": "Georgia",
+    "iso_code": "GEO",
+    "region": "caucasus",
+    "currency": "GEL",
+    "languages": ["ka"],
+    "nomad_visa_available": true,
+    "summary": "365-day visa-free entry, the Remotely from Georgia program, and crypto-friendly banking make Tbilisi a perennial choice for nomads who want a year of breathing room."
+  },
+  {
+    "slug": "uzbekistan",
+    "name": "Uzbekistan",
+    "iso_code": "UZB",
+    "region": "central-asia",
+    "currency": "UZS",
+    "languages": ["uz"],
+    "nomad_visa_available": false,
+    "summary": "Tashkent's emerging tech scene and visa-free 30-day entry for many Western passports make Uzbekistan the most accessible Central Asian gateway for short remote stints."
+  },
+  {
+    "slug": "kazakhstan",
+    "name": "Kazakhstan",
+    "iso_code": "KAZ",
+    "region": "central-asia",
+    "currency": "KZT",
+    "languages": ["kk", "ru"],
+    "nomad_visa_available": false,
+    "summary": "Almaty's coworking scene, strong mobile data, and a 30-day visa-free policy give Kazakhstan the strongest Central Asia infrastructure stack outside the Caspian capitals."
+  },
+  {
+    "slug": "kyrgyzstan",
+    "name": "Kyrgyzstan",
+    "iso_code": "KGZ",
+    "region": "central-asia",
+    "currency": "KGS",
+    "languages": ["ky", "ru"],
+    "nomad_visa_available": false,
+    "summary": "60-day visa-free entry, Issyk-Kul's summer scene, and Bishkek's rock-bottom rents make Kyrgyzstan the cheapest Central Asian option for remote workers."
+  },
+  {
+    "slug": "mongolia",
+    "name": "Mongolia",
+    "iso_code": "MNG",
+    "region": "central-asia",
+    "currency": "MNT",
+    "languages": ["mn"],
+    "nomad_visa_available": false,
+    "summary": "Ulaanbaatar is the most remote big-city option for nomads. 30-day visa-free for most Western passports, fast 5G, sub-$1k/mo. Pure frontier with a steppe escape on the doorstep."
+  },
+  {
+    "slug": "vietnam",
+    "name": "Vietnam",
+    "iso_code": "VNM",
+    "region": "southeast-asia",
+    "currency": "VND",
+    "languages": ["vi"],
+    "nomad_visa_available": false,
+    "summary": "New 90-day e-visa with multiple entries opened Vietnam meaningfully to nomads — Da Nang and Hoi An have the strongest secondary infrastructure outside Saigon."
+  },
+  {
+    "slug": "thailand",
+    "name": "Thailand",
+    "iso_code": "THA",
+    "region": "southeast-asia",
+    "currency": "THB",
+    "languages": ["th"],
+    "nomad_visa_available": true,
+    "summary": "The Destination Thailand Visa (DTV) — 180 days entry, 5-year validity — changed the calculus for nomads. Secondary cities like Chiang Rai and Pai have far weaker SERPs than Chiang Mai."
+  },
+  {
+    "slug": "indonesia",
+    "name": "Indonesia",
+    "iso_code": "IDN",
+    "region": "southeast-asia",
+    "currency": "IDR",
+    "languages": ["id"],
+    "nomad_visa_available": true,
+    "summary": "Indonesia's E33G remote worker KITAS gives a year of legal nomad residence. Alternative Bali areas like Sidemen, Amed, and Lovina are where the next wave is moving as Canggu prices climb."
+  },
+  {
+    "slug": "malaysia",
+    "name": "Malaysia",
+    "iso_code": "MYS",
+    "region": "southeast-asia",
+    "currency": "MYR",
+    "languages": ["ms", "en"],
+    "nomad_visa_available": true,
+    "summary": "DE Rantau Nomad Pass and Penang's English-speaking food scene make Malaysia the easiest soft landing in Southeast Asia for first-time nomads. Stronger fiber than its neighbors."
+  },
+  {
+    "slug": "barbados",
+    "name": "Barbados",
+    "iso_code": "BRB",
+    "region": "caribbean",
+    "currency": "BBD",
+    "languages": ["en"],
+    "nomad_visa_available": true,
+    "summary": "The 12-month Welcome Stamp gives remote workers tax-free foreign income, fast broadband, and a community already full of remote tech workers. The most-trodden Caribbean nomad path."
+  },
+  {
+    "slug": "dominica",
+    "name": "Dominica",
+    "iso_code": "DMA",
+    "region": "caribbean",
+    "currency": "XCD",
+    "languages": ["en"],
+    "nomad_visa_available": true,
+    "summary": "The Work In Nature (WIN) Extended Stay Visa runs 18 months. DCash CBDC, rainforest interior, and very little tourist saturation make Dominica the Caribbean's most undercovered nomad pick."
+  },
+  {
+    "slug": "mauritius",
+    "name": "Mauritius",
+    "iso_code": "MUS",
+    "region": "africa",
+    "currency": "MUR",
+    "languages": ["en", "fr"],
+    "nomad_visa_available": true,
+    "summary": "The Premium Visa is free, lasts a year, and asks only $1,500/mo. Foreign income isn't taxed locally and the island has the strongest infrastructure stack in Africa."
+  },
+  {
+    "slug": "namibia",
+    "name": "Namibia",
+    "iso_code": "NAM",
+    "region": "africa",
+    "currency": "NAD",
+    "languages": ["en"],
+    "nomad_visa_available": true,
+    "summary": "Namibia's Digital Nomad Visa runs six months at $2,000/mo. English is official, the dollar pegs to ZAR, and Windhoek has serious coworking infrastructure for the region."
+  },
+  {
+    "slug": "cape-verde",
+    "name": "Cape Verde",
+    "iso_code": "CPV",
+    "region": "africa",
+    "currency": "CVE",
+    "languages": ["pt"],
+    "nomad_visa_available": true,
+    "summary": "Atlantic island chain off West Africa with a Remote Working Program for EU/US passports. Year-round trade winds, decent fiber in São Vicente, Portuguese-speaking, EUR-pegged escudo."
+  },
+  {
+    "slug": "kenya",
+    "name": "Kenya",
+    "iso_code": "KEN",
+    "region": "africa",
+    "currency": "KES",
+    "languages": ["sw", "en"],
+    "nomad_visa_available": true,
+    "summary": "Kenya's Class N Digital Nomad permit launched in 2025. Nairobi's Silicon Savannah tech scene plus Mombasa for coast time. English official, undercovered, and improving fast."
+  }
+]

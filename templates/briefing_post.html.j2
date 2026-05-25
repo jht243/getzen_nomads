@@ -1,0 +1,63 @@
+{% extends "_base.html.j2" %}
+
+{% block content %}
+<main class="container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>›</span>
+    <a href="/briefings/">Briefings</a><span>›</span>
+    <span>{{ post.title }}</span>
+  </nav>
+
+  <article>
+    <header>
+      {% if post.country_name %}<div class="article-eyebrow">{{ post.country_name }}{% if post.topic_name %} · {{ post.topic_name }}{% endif %}</div>{% endif %}
+      <h1>{{ post.title }}</h1>
+      {% if post.subtitle %}<p class="subtitle">{{ post.subtitle }}</p>{% endif %}
+      <div class="meta">
+        <span><strong>{{ post.published_date.strftime('%B %d, %Y') }}</strong></span>
+        {% if post.reading_minutes %}<span>{{ post.reading_minutes }} min read</span>{% endif %}
+        {% if post.canonical_source_url %}
+          <a class="source-pill" href="{{ post.canonical_source_url }}" rel="nofollow noopener" target="_blank">
+            Source: {{ source_display_name(post.canonical_source_url) }}
+          </a>
+        {% endif %}
+      </div>
+    </header>
+
+    {% if post.takeaways %}
+    <aside class="takeaways" aria-label="Key takeaways">
+      <h3>Key takeaways</h3>
+      <ul>
+        {% for t in post.takeaways %}<li>{{ t }}</li>{% endfor %}
+      </ul>
+    </aside>
+    {% endif %}
+
+    <div class="body">{{ post.body_html|safe }}</div>
+
+    {% if post.canonical_source_url %}
+    <div class="source-citation">
+      Primary source:
+      <a href="{{ post.canonical_source_url }}" rel="nofollow noopener" target="_blank">
+        {{ source_display_name(post.canonical_source_url) }}
+      </a>
+    </div>
+    {% endif %}
+  </article>
+
+  {% if related %}
+    {% from "_card_grid.html.j2" import card_grid_section %}
+    {% set _cards = [] %}
+    {% for r in related %}
+      {% set _ = _cards.append({
+        'href': '/briefings/' ~ r.slug,
+        'eyebrow': 'RELATED',
+        'title': r.title,
+        'tagline': r.summary or '',
+        'cta': 'Read briefing'
+      }) %}
+    {% endfor %}
+    {{ card_grid_section(heading='Related briefings', cards=_cards, aria_label='Related briefings') }}
+  {% endif %}
+</main>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "_base.html.j2" %}
+{% from "_icons.html.j2" import ui_icon %}
+
+{% block page_hero %}
+<section class="page-hero-strip">
+  <div class="page-hero-inner">
+    <div class="page-hero-eyebrow"><em>Guides</em> · Country and city deep-dives</div>
+    <h1 class="page-hero-title">Digital Nomad Guides</h1>
+    <p class="page-hero-subtitle">Country guides, city guides, and topic deep-spokes — built for nomads who want practical detail, not travel-blog fluff.</p>
+  </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<main class="container-wide">
+  {% for region, countries_in_region in countries_by_region.items() %}
+  <section class="cr-card-section" aria-label="{{ region|replace('-', ' ')|title }}">
+    <header class="cr-card-header">
+      <h2 class="cr-card-title">{{ region|replace('-', ' ')|title }}</h2>
+      <span class="cr-card-meta">{{ countries_in_region|length }} {{ 'country' if countries_in_region|length == 1 else 'countries' }}</span>
+    </header>
+    <div class="cr-card-grid">
+      {% for c in countries_in_region %}
+      <a class="cr-card region-card region-{{ c.region }}" href="/{{ c.slug }}/">
+        <span class="cr-card-eyebrow">COUNTRY GUIDE</span>
+        <h3 class="cr-card-headline">{{ c.name }}</h3>
+        <p class="cr-card-tagline">{{ c.summary }}</p>
+        <div class="cr-card-chips">
+          {% if c.city_count %}
+          <span class="cr-card-chip">{{ ui_icon('map-pin', 12) }} {{ c.city_count }} {{ 'city' if c.city_count == 1 else 'cities' }}</span>
+          {% endif %}
+          {% if c.nomad_visa_available %}
+          <span class="cr-card-chip is-positive">{{ ui_icon('check', 12) }} Nomad visa</span>
+          {% endif %}
+        </div>
+        <span class="cr-card-cta">Read guide</span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+</main>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "_base.html.j2" %}
+{% from "_icons.html.j2" import topic_icon, ui_icon %}
+
+{% block page_hero %}
+<section class="page-hero-strip">
+  <div class="page-hero-inner">
+    <div class="page-hero-topic-mark" aria-hidden="true">{{ topic_icon(topic.slug, 28) }}</div>
+    <div class="page-hero-eyebrow"><em>{{ country.name|upper }}</em> · {{ topic.name|upper }}</div>
+    <h1 class="page-hero-title">{{ page.title or (topic.name ~ ' in ' ~ country.name) }}</h1>
+    {% if page.hero_subtitle %}
+    <p class="page-hero-subtitle">{{ page.hero_subtitle }}</p>
+    {% endif %}
+  </div>
+</section>
+<style>
+  .page-hero-topic-mark {
+    width: 56px; height: 56px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #ffd4b8;
+    margin: 0 auto 14px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>›</span>
+    <a href="/rankings/{{ topic.slug }}/">{{ topic.name }} Rankings</a><span>›</span>
+    <a href="/{{ country.slug }}/">{{ country.name }}</a><span>›</span>
+    <span>{{ topic.name }}</span>
+  </nav>
+
+  {% if page and page.body_html %}
+  <article><div class="body">{{ page.body_html|safe }}</div></article>
+  {% else %}
+  <article><div class="body">
+    <p>{{ topic.description }}</p>
+    <p><em>The full {{ topic.name|lower }} guide for {{ country.name }} is being researched. In the meantime, browse {{ country.name }}'s city-level {{ topic.name|lower }} deep-spokes below.</em></p>
+  </div></article>
+  {% endif %}
+
+  {% if cities %}
+  <section class="cr-card-section" aria-label="City deep-dives">
+    <header class="cr-card-header">
+      <h2 class="cr-card-title">{{ topic.name }} by city in {{ country.name }}</h2>
+      <span class="cr-card-meta">{{ cities|length }} cities</span>
+    </header>
+    <div class="cr-card-grid">
+      {% for c in cities %}
+      <a class="cr-card region-card region-{{ country.region }}" href="/{{ country.slug }}/{{ c.slug }}/{{ topic.slug }}/">
+        <span class="cr-card-eyebrow">{{ ui_icon('map-pin', 11) }} {{ c.name|upper }}</span>
+        <h3 class="cr-card-headline">{{ topic.name }} in {{ c.name }}</h3>
+        <p class="cr-card-tagline">{{ topic.description }}</p>
+        <span class="cr-card-cta">Read deep-dive</span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if page and page.faq %}
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    {% for item in page.faq %}
+    <details {% if loop.first %}open{% endif %}>
+      <summary>{{ item.question }}</summary><p>{{ item.answer }}</p>
+    </details>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {% from "_cluster_nav.html.j2" import cluster_nav %}
+  {{ cluster_nav(cluster_ctx) }}
+</main>
+{% endblock %}

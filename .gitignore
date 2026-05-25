@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+*.db
+*.db-journal
+storage/
+output/
+.DS_Store
+.idea/
+.vscode/
+node_modules/
+subscribers.json

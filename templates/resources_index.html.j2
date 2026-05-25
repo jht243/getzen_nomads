@@ -1,0 +1,48 @@
+{% extends "_base.html.j2" %}
+{% from "_icons.html.j2" import topic_icon, ui_icon %}
+
+{% block page_hero %}
+<section class="page-hero-strip">
+  <div class="page-hero-inner">
+    <div class="page-hero-eyebrow"><em>Resources</em> · Interactive tools for nomads</div>
+    <h1 class="page-hero-title">Tools & Resources</h1>
+    <p class="page-hero-subtitle">Practical tools built on Get ZEN's continuously-updated digital nomad dataset.</p>
+  </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<main class="container-wide">
+  <section class="cr-card-section" aria-label="Tools">
+    <header class="cr-card-header">
+      <h2 class="cr-card-title">Tools</h2>
+      <span class="cr-card-meta">{{ tools|length }} tools</span>
+    </header>
+    <div class="cr-card-grid">
+      {% for t in tools %}
+      <a class="cr-card ranking-card" href="/tools/{{ t.slug }}/">
+        <div class="ranking-card-icon">{{ topic_icon(t.icon_slug, 24) }}</div>
+        <span class="cr-card-eyebrow">TOOL</span>
+        <h3 class="cr-card-headline">{{ t.title }}</h3>
+        <p class="cr-card-tagline">{{ t.subtitle }}</p>
+        <span class="cr-card-cta">Open tool</span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+
+<style>
+  .ranking-card { padding-top: 24px; }
+  .ranking-card .ranking-card-icon {
+    width: 52px; height: 52px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(211,84,0,0.16) 0%, rgba(10,77,92,0.10) 100%);
+    color: var(--sr-red);
+    margin-bottom: 4px;
+  }
+  .ranking-card .cr-card-eyebrow { color: var(--sr-red); }
+  .ranking-card .cr-card-eyebrow::before { background: var(--sr-red); }
+</style>
+{% endblock %}

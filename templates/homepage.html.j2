@@ -1,0 +1,215 @@
+{% extends "_base.html.j2" %}
+{% from "_icons.html.j2" import topic_icon, ui_icon %}
+
+{% block page_hero %}
+<section class="page-hero-strip">
+  <div class="page-hero-inner">
+    <div class="page-hero-eyebrow"><em>Rankings</em> · Digital nomad destinations</div>
+    <h1 class="page-hero-title">Destinations, Ranked</h1>
+    <p class="page-hero-subtitle">Compare visas, cost, internet, safety, crypto, banking, and more.</p>
+  </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<main class="container-wide">
+
+  {# ── PRIMARY: All rankings grid ─────────────────────────────────── #}
+  <section class="cr-card-section" aria-label="Rankings">
+    <header class="cr-card-header">
+      <h2 class="cr-card-title">Rankings by topic</h2>
+      <span class="cr-card-meta">{{ ranking_topics|length }} ranked metrics</span>
+    </header>
+    <p class="cr-card-intro">Click any metric to see every destination compared on that single dimension.</p>
+    <div class="cr-card-grid">
+      {% for t in ranking_topics %}
+      <a class="cr-card ranking-card" href="/rankings/{{ t.slug }}/">
+        <div class="ranking-card-icon">{{ topic_icon(t.slug, 22) }}</div>
+        <span class="cr-card-eyebrow">RANKING</span>
+        <h3 class="cr-card-headline">{{ t.name }}</h3>
+        <p class="cr-card-tagline">{{ t.description }}</p>
+        <span class="cr-card-cta">See ranking</span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  {# ── FEATURED: Inline top-5 leaderboards for the most-searched rankings ─
+       Two-column grid on desktop, single-column on mobile. Each leaderboard
+       is a self-contained card with country flag + rank + region pill. #}
+  {% if featured_rankings %}
+  <section class="featured-rankings-grid" aria-label="Featured rankings">
+    {% for feat in featured_rankings %}
+    <div class="featured-ranking-card" aria-label="Top {{ feat.topic_name }}">
+      <header class="featured-ranking-header">
+        <h2 class="featured-ranking-title">Top {{ feat.topic_name|lower }}</h2>
+        <a class="featured-ranking-link" href="/rankings/{{ feat.topic_slug }}/">Full ranking →</a>
+      </header>
+      <ul class="leaderboard">
+        {% for r in feat.rows %}
+        <li class="leaderboard-row">
+          <span class="leaderboard-rank">{{ loop.index }}</span>
+          {% if r.flag %}<span class="leaderboard-flag" aria-hidden="true">{{ r.flag }}</span>{% endif %}
+          <a class="leaderboard-link" href="{{ r.detail_url }}">
+            <span class="leaderboard-name">{{ r.name }}</span>
+            {% if r.region %}<span class="leaderboard-region region-pill region-{{ r.region }}">{{ r.region|replace('-', ' ')|title }}</span>{% endif %}
+          </a>
+          <span class="leaderboard-meta">{{ r.cell|safe }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {# ── SECONDARY: Frontier destinations grid ──────────────────────── #}
+  {% if featured_countries %}
+  <section class="cr-card-section" aria-label="Featured destinations">
+    <header class="cr-card-header">
+      <h2 class="cr-card-title">Destinations</h2>
+      <span class="cr-card-meta">Hand-picked destinations</span>
+    </header>
+    <p class="cr-card-intro">Every country Get ZEN covers in depth — chosen because their SERPs are weak, their nomad infrastructure is real, and the practical intelligence is hard to find elsewhere.</p>
+    <div class="cr-card-grid">
+      {% for c in featured_countries %}
+      <a class="cr-card region-card region-{{ c.region }}" href="/{{ c.slug }}/">
+        <span class="cr-card-eyebrow">{{ c.region|replace('-', ' ')|upper if c.region else 'DESTINATION' }}</span>
+        <h3 class="cr-card-headline">{{ c.name }}</h3>
+        <p class="cr-card-tagline">{{ c.summary }}</p>
+        <div class="cr-card-chips">
+          {% if c.city_count %}
+          <span class="cr-card-chip">{{ ui_icon('map-pin', 12) }} {{ c.city_count }} {{ 'city' if c.city_count == 1 else 'cities' }}</span>
+          {% endif %}
+          {% if c.nomad_visa_available %}
+          <span class="cr-card-chip is-positive">{{ ui_icon('check', 12) }} Nomad visa</span>
+          {% endif %}
+        </div>
+        <span class="cr-card-cta">Explore</span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {# ── TERTIARY: Briefings compact rail ───────────────────────────── #}
+  {% if latest_briefings %}
+  <section class="cr-rail-section" aria-label="Latest briefings">
+    <header class="cr-rail-header">
+      <h2 class="cr-rail-title">Daily briefings</h2>
+      <a class="cr-rail-link" href="/briefings/">See all →</a>
+    </header>
+    <ul class="cr-rail-list">
+      {% for b in latest_briefings[:4] %}
+      <li class="cr-rail-item">
+        <a href="/briefings/{{ b.slug }}">
+          <span class="cr-rail-tag">{{ (b.country_name|upper) if b.country_name else 'BRIEFING' }}</span>
+          <span class="cr-rail-title-text">{{ b.title }}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+</main>
+
+<style>
+  /* Rankings cards lead with a colored icon disc + stronger eyebrow. */
+  .ranking-card { padding-top: 24px; }
+  .ranking-card .ranking-card-icon {
+    width: 52px; height: 52px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(211,84,0,0.16) 0%, rgba(10,77,92,0.10) 100%);
+    color: var(--sr-red);
+    margin-bottom: 4px;
+  }
+  .ranking-card .cr-card-eyebrow { color: var(--sr-red); }
+  .ranking-card .cr-card-eyebrow::before { background: var(--sr-red); }
+  .ranking-card:hover .ranking-card-icon {
+    background: linear-gradient(135deg, rgba(211,84,0,0.24) 0%, rgba(10,77,92,0.16) 100%);
+  }
+
+  /* Featured rankings grid — 2 columns on desktop, 1 on mobile. */
+  .featured-rankings-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin: 48px 0 24px;
+  }
+  @media (min-width: 760px) {
+    .featured-rankings-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  }
+  .featured-ranking-card {
+    background: #fff;
+    border: 1px solid var(--sr-gray-light);
+    border-radius: 8px;
+    padding: 20px 22px 14px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .featured-ranking-card:hover { border-color: #cfd6e0; box-shadow: 0 4px 14px rgba(10, 77, 92, 0.06); }
+  .featured-ranking-header {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--sr-blue);
+  }
+  .featured-ranking-title {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    color: var(--sr-blue-dark);
+    margin: 0;
+    text-transform: none;
+    letter-spacing: -0.2px;
+    text-transform: capitalize;
+  }
+  .featured-ranking-link {
+    font-size: 12px; font-weight: 600; color: var(--sr-blue);
+    text-decoration: none; flex-shrink: 0;
+  }
+  .featured-ranking-link:hover { color: var(--sr-red); }
+
+  .leaderboard { list-style: none; padding: 0; margin: 0; }
+  .leaderboard-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 2px;
+    border-bottom: 1px solid var(--sr-gray-light);
+  }
+  .leaderboard-row:last-child { border-bottom: 0; }
+  .leaderboard-rank {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 26px; height: 26px;
+    border-radius: 13px;
+    background: var(--sr-blue-dark); color: var(--white);
+    font-weight: 700; font-size: 12px; flex-shrink: 0;
+  }
+  .leaderboard-flag {
+    font-size: 22px; line-height: 1; flex-shrink: 0;
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.08));
+  }
+  .leaderboard-link {
+    flex: 1; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    text-decoration: none; color: var(--sr-dark-text);
+    min-width: 0;
+  }
+  .leaderboard-name {
+    font-family: var(--font-serif); font-size: 15px; font-weight: 700;
+    color: var(--sr-blue-dark);
+  }
+  .leaderboard-link:hover .leaderboard-name { color: var(--sr-red); }
+  .leaderboard-region.region-pill {
+    padding: 2px 7px; border-radius: 999px; font-size: 9.5px; font-weight: 600;
+    color: white; letter-spacing: 0.2px;
+  }
+  .leaderboard-region.region-latin-america  { background: var(--region-latin-america); }
+  .leaderboard-region.region-balkans        { background: var(--region-balkans); }
+  .leaderboard-region.region-caucasus       { background: var(--region-caucasus); }
+  .leaderboard-region.region-central-asia   { background: var(--region-central-asia); }
+  .leaderboard-region.region-southeast-asia { background: var(--region-southeast-asia); }
+  .leaderboard-meta {
+    font-size: 12px; color: var(--sr-gray-text); font-weight: 600;
+    flex-shrink: 0;
+  }
+</style>
+{% endblock %}

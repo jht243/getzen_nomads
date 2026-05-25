@@ -1,0 +1,407 @@
+{% extends "_base.html.j2" %}
+{% from "_icons.html.j2" import topic_icon, ui_icon %}
+
+{% block page_hero %}
+<section class="page-hero-strip">
+  <div class="page-hero-inner">
+    <div class="page-hero-eyebrow"><em>Rankings</em> · Digital nomad destinations</div>
+    <h1 class="page-hero-title">Digital Nomad Rankings</h1>
+    <p class="page-hero-subtitle">Compare visas, cost, internet, safety, crypto, banking, and more.</p>
+  </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<main class="container-wide">
+
+  {# ── PRIMARY: master comparison table with filters ────────────────── #}
+  <section class="comparison-section" aria-label="Digital nomad rankings table">
+    <header class="cr-card-header">
+      <h2 class="cr-card-title">Nomad visas and residence permits</h2>
+      <span class="cr-card-meta"><span data-visible-count>{{ comparison_rows|length }}</span> of {{ comparison_rows|length }} destinations</span>
+    </header>
+
+    {# Client-side filter bar — same pattern as Passportivity. #}
+    <div class="filter-bar" role="search" aria-label="Filter rankings">
+      <label class="filter-field">
+        <span class="filter-label">Monthly income</span>
+        <select data-filter="income" class="filter-select">
+          <option value="">Any income</option>
+          <option value="none">No requirement</option>
+          <option value="u1500">Under $1,500/mo</option>
+          <option value="1500-2500">$1,500 – $2,500/mo</option>
+          <option value="2500-4000">$2,500 – $4,000/mo</option>
+          <option value="4000+">$4,000+/mo</option>
+        </select>
+      </label>
+      <label class="filter-field">
+        <span class="filter-label">Region</span>
+        <select data-filter="region" class="filter-select">
+          <option value="">Any region</option>
+          <option value="latin-america">Latin America</option>
+          <option value="caribbean">Caribbean</option>
+          <option value="balkans">Balkans</option>
+          <option value="eastern-europe">Eastern Europe</option>
+          <option value="caucasus">Caucasus</option>
+          <option value="central-asia">Central Asia</option>
+          <option value="southeast-asia">Southeast Asia</option>
+          <option value="africa">Africa</option>
+        </select>
+      </label>
+      <label class="filter-field">
+        <span class="filter-label">English level</span>
+        <select data-filter="english" class="filter-select">
+          <option value="">Any level</option>
+          <option value="native">Native</option>
+          <option value="very">Very high</option>
+          <option value="high">High</option>
+          <option value="moderate">Moderate</option>
+          <option value="low">Low</option>
+        </select>
+      </label>
+      <label class="filter-field">
+        <span class="filter-label">Sort by</span>
+        <select data-filter="sort" class="filter-select">
+          <option value="score-desc">Total score ↓</option>
+          <option value="score-asc">Total score ↑</option>
+          <option value="cost-asc">Cost (cheapest) ↑</option>
+          <option value="internet-desc">Internet (fastest) ↓</option>
+          <option value="safety-asc">Safety (safest) ↑</option>
+          <option value="income-asc">Income req ↑</option>
+          <option value="name-asc">Country A–Z</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="comparison-scroll">
+      <table class="comparison-table" id="rankings-table">
+        <thead>
+          <tr>
+            <th class="rank-col">№</th>
+            <th class="country-col">Country</th>
+            <th class="score-col">Score</th>
+            <th class="metric-col">Visa</th>
+            <th class="metric-col">Income req</th>
+            <th class="metric-col">Cost</th>
+            <th class="metric-col">Safety</th>
+            <th class="metric-col">Internet</th>
+            <th class="metric-col">Crypto</th>
+            <th class="metric-col">English</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in comparison_rows %}
+          <tr
+            data-region="{{ r.country.region or '' }}"
+            data-income-band="{{ r.income.band }}"
+            data-income-usd="{{ r.income.usd }}"
+            data-english="{{ r.english.slug }}"
+            data-score="{{ r.score }}"
+            data-cost="{{ r.cost.num }}"
+            data-internet="{{ r.internet.num }}"
+            data-safety="{{ r.safety.num }}"
+            data-name="{{ r.country.name }}">
+            <td class="rank-col"><span class="rank-num">{{ loop.index }}</span></td>
+            <td class="country-col">
+              <a class="country-link" href="/{{ r.country.slug }}/">
+                {% if r.flag %}<span class="country-flag" aria-hidden="true">{{ r.flag }}</span>{% endif %}
+                <span class="country-name">{{ r.country.name }}</span>
+              </a>
+            </td>
+            <td class="score-col">
+              <div class="score-cell">
+                <strong class="score-value">{{ r.score }}</strong>
+                <div class="score-bar"><span class="score-bar-fill" style="width: {{ r.score }}%"></span></div>
+              </div>
+            </td>
+            <td class="metric-col"><span class="metric-pill {{ r.visa.cls }}">{{ r.visa.label }}</span></td>
+            <td class="metric-col">{{ r.income.label }}</td>
+            <td class="metric-col"><span class="metric-pill metric-pill-mono">{{ r.cost.label }}</span></td>
+            <td class="metric-col"><span class="metric-pill {{ r.safety.cls }}">{{ r.safety.label }}</span></td>
+            <td class="metric-col"><span class="metric-pill">{{ r.internet.label }}</span></td>
+            <td class="metric-col"><span class="metric-pill {{ r.crypto.cls }}">{{ r.crypto.label }}</span></td>
+            <td class="metric-col"><span class="metric-pill {{ r.english.cls }}">{{ r.english.label }}</span></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <p class="comparison-empty" data-empty-state hidden>No destinations match these filters.</p>
+    </div>
+  </section>
+
+  {# ── SECONDARY: drill-down by topic ────────────────────────────────── #}
+  <section class="cr-card-section" aria-label="Rankings by topic">
+    <header class="cr-card-header">
+      <h2 class="cr-card-title">Or browse by topic</h2>
+      <span class="cr-card-meta">{{ ranking_topics|length }} dimensions</span>
+    </header>
+    <p class="cr-card-intro">Each topic ranking compares every destination on a single dimension — visa accessibility, cost, internet, and more.</p>
+    <div class="cr-card-grid">
+      {% for t in ranking_topics %}
+      <a class="cr-card ranking-card" href="/rankings/{{ t.slug }}/">
+        <div class="ranking-card-icon">{{ topic_icon(t.slug, 22) }}</div>
+        <span class="cr-card-eyebrow">RANKING</span>
+        <h3 class="cr-card-headline">{{ t.name }}</h3>
+        <p class="cr-card-tagline">{{ t.description }}</p>
+        <span class="cr-card-cta">See ranking</span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  {# ── Methodology lives below the data, per the site rule ──────────── #}
+  <section class="ranking-methodology" aria-label="Methodology">
+    <h2 class="ranking-section-h">Methodology</h2>
+    <p>Composite score (0–100) combines visa accessibility, US State Department safety level, monthly cost band, residential internet speed, and crypto regulatory friendliness. Cost and internet use region averages until per-country live data lands; visa and safety use country-specific facts. Sources: travel.state.gov, official immigration portals, Ookla Speedtest median 90-day measurements, and Get ZEN's nomad-forum scraper.</p>
+  </section>
+</main>
+
+<style>
+  .comparison-section { margin: 28px 0 56px; }
+
+  /* Filter bar — 4 dropdowns in a row, wrapping on narrow viewports.
+     Visual style: white card, gray border, label above the value, native
+     <select> chevron. Modeled on Passportivity's filter pattern. */
+  .filter-bar {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 18px 0 14px;
+  }
+  @media (min-width: 640px)  { .filter-bar { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 960px)  { .filter-bar { grid-template-columns: repeat(4, 1fr); } }
+  .filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 16px 10px;
+    background: #fff;
+    border: 1px solid var(--sr-gray-light);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .filter-field:hover { border-color: #cfd6e0; }
+  .filter-field:focus-within { border-color: var(--sr-blue); }
+  .filter-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--sr-gray-text);
+    letter-spacing: 0.2px;
+  }
+  .filter-select {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: 0;
+    padding: 0 24px 0 0;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--sr-blue-dark);
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='none' stroke='%23073945' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M1 1l5 5 5-5'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0 center;
+    background-size: 12px 8px;
+  }
+  .filter-select:focus { outline: 0; }
+
+  .comparison-empty {
+    padding: 32px 16px;
+    text-align: center;
+    color: var(--sr-gray-text);
+    font-size: 14px;
+  }
+
+  /* Horizontal scroll on narrow viewports keeps the table compact without
+     crushing columns. */
+  .comparison-scroll { overflow-x: auto; margin-top: 14px; border: 1px solid var(--sr-gray-light); border-radius: 6px; }
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-sans);
+    font-size: 14.5px;
+    min-width: 920px;
+  }
+  .comparison-table thead {
+    background: var(--sr-gray-bg);
+    border-bottom: 2px solid var(--sr-blue);
+  }
+  .comparison-table th {
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.2px;
+    color: var(--sr-gray-text);
+    padding: 14px 12px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  .comparison-table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--sr-gray-light);
+    vertical-align: middle;
+  }
+  .comparison-table tbody tr:last-child td { border-bottom: 0; }
+  .comparison-table tbody tr:hover td { background: rgba(10, 77, 92, 0.03); }
+
+  /* Columns */
+  .comparison-table .rank-col { width: 48px; text-align: center; }
+  .comparison-table .country-col { width: 200px; }
+  .comparison-table .score-col { width: 140px; }
+  .comparison-table .metric-col { width: 130px; white-space: nowrap; }
+
+  /* Rank number — large + bold, grey, like Passportivity */
+  .rank-num { font-family: var(--font-serif); font-size: 16px; font-weight: 700; color: var(--sr-gray-text); }
+
+  /* Country cell */
+  .country-link {
+    display: inline-flex; align-items: center; gap: 10px;
+    text-decoration: none; color: var(--sr-blue-dark);
+    transition: color 0.15s;
+  }
+  .country-link:hover { color: var(--sr-red); }
+  .country-flag { font-size: 22px; line-height: 1; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.08)); }
+  .country-name { font-family: var(--font-serif); font-weight: 700; font-size: 16px; }
+
+  /* Composite score: big number + thin progress bar */
+  .score-cell { display: flex; flex-direction: column; gap: 4px; }
+  .score-value {
+    font-family: var(--font-serif); font-size: 19px; font-weight: 700;
+    color: var(--sr-blue-dark); line-height: 1;
+  }
+  .score-bar {
+    width: 100%; height: 4px;
+    background: var(--sr-gray-light);
+    border-radius: 2px; overflow: hidden;
+  }
+  .score-bar-fill {
+    display: block; height: 100%;
+    background: linear-gradient(90deg, var(--sr-red), var(--sr-blue));
+    border-radius: 2px;
+  }
+
+  /* Metric pills — small, color-coded by sentiment */
+  .metric-pill {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--sr-gray-bg);
+    color: var(--sr-dark-text);
+    border: 1px solid var(--sr-gray-light);
+    font-size: 12.5px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .metric-pill.is-positive {
+    background: rgba(45, 138, 135, 0.08);
+    color: #1f6a67;
+    border-color: rgba(45, 138, 135, 0.30);
+  }
+  .metric-pill.is-negative {
+    background: rgba(211, 84, 0, 0.08);
+    color: #a64200;
+    border-color: rgba(211, 84, 0, 0.30);
+  }
+  .metric-pill-mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+
+  /* Methodology callout below the table */
+  .ranking-methodology { margin: 0 0 56px; padding: 18px 22px; background: var(--sr-gray-bg); border-left: 3px solid var(--sr-blue); border-radius: 4px; }
+  .ranking-methodology h2.ranking-section-h { font-family: var(--font-serif); font-size: 14px; text-transform: uppercase; letter-spacing: 1.4px; color: var(--sr-blue-dark); margin: 0 0 8px; }
+  .ranking-methodology p { font-size: 14px; color: var(--sr-dark-text); margin: 0; line-height: 1.55; }
+
+  /* Topic-grid cards retain the icon-disc treatment */
+  .ranking-card { padding-top: 24px; }
+  .ranking-card .ranking-card-icon {
+    width: 52px; height: 52px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(211,84,0,0.16) 0%, rgba(10,77,92,0.10) 100%);
+    color: var(--sr-red);
+    margin-bottom: 4px;
+  }
+  .ranking-card .cr-card-eyebrow { color: var(--sr-red); }
+  .ranking-card .cr-card-eyebrow::before { background: var(--sr-red); }
+</style>
+
+<script>
+/* Rankings table — client-side filter + sort + rank renumbering.
+   Reads filter dropdown values, hides non-matching rows, re-sorts the
+   visible set in the chosen order, and updates the rank badges + the
+   "X of Y destinations" counter in the header. Pure DOM, no deps. */
+(function initRankingsFilters() {
+  var table = document.getElementById('rankings-table');
+  if (!table) return;
+  var tbody = table.querySelector('tbody');
+  if (!tbody) return;
+
+  var allRows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+  var filters = document.querySelectorAll('[data-filter]');
+  var countEl = document.querySelector('[data-visible-count]');
+  var emptyEl = document.querySelector('[data-empty-state]');
+
+  function getFilterValue(name) {
+    var el = document.querySelector('[data-filter="' + name + '"]');
+    return el ? el.value : '';
+  }
+
+  function rowMatches(row) {
+    var fIncome = getFilterValue('income');
+    if (fIncome && row.getAttribute('data-income-band') !== fIncome) return false;
+    var fRegion = getFilterValue('region');
+    if (fRegion && row.getAttribute('data-region') !== fRegion) return false;
+    var fEnglish = getFilterValue('english');
+    if (fEnglish && row.getAttribute('data-english') !== fEnglish) return false;
+    return true;
+  }
+
+  function applySort(rows) {
+    var sortKey = getFilterValue('sort') || 'score-desc';
+    var attr, dir;
+    switch (sortKey) {
+      case 'score-asc':     attr = 'data-score';    dir =  1; break;
+      case 'cost-asc':      attr = 'data-cost';     dir =  1; break;
+      case 'internet-desc': attr = 'data-internet'; dir = -1; break;
+      case 'safety-asc':    attr = 'data-safety';   dir =  1; break;
+      case 'income-asc':    attr = 'data-income-usd'; dir = 1; break;
+      case 'name-asc':      attr = 'data-name';     dir =  1; break;
+      case 'score-desc':
+      default:              attr = 'data-score';    dir = -1; break;
+    }
+    rows.sort(function(a, b) {
+      var av = a.getAttribute(attr);
+      var bv = b.getAttribute(attr);
+      if (attr === 'data-name') return dir * av.localeCompare(bv);
+      return dir * (parseFloat(av) - parseFloat(bv));
+    });
+    return rows;
+  }
+
+  function render() {
+    var matching = allRows.filter(rowMatches);
+    var sorted = applySort(matching.slice());
+    // Detach all, append visible in sort order, hide the rest.
+    allRows.forEach(function(r) { r.style.display = 'none'; });
+    sorted.forEach(function(r, i) {
+      r.style.display = '';
+      var badge = r.querySelector('.rank-num');
+      if (badge) badge.textContent = String(i + 1);
+      tbody.appendChild(r);
+    });
+    if (countEl) countEl.textContent = String(sorted.length);
+    if (emptyEl) emptyEl.hidden = sorted.length > 0;
+  }
+
+  filters.forEach(function(el) {
+    el.addEventListener('change', render);
+  });
+  // Initial render to ensure default sort is applied (it already is from
+  // server-side, but this also normalizes if the user reloads with sticky
+  // browser state on the select element).
+  render();
+})();
+</script>
+{% endblock %}

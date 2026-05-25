@@ -1,0 +1,81 @@
+{% extends "_base.html.j2" %}
+{% from "_icons.html.j2" import topic_icon, ui_icon %}
+
+{% block page_hero %}
+<section class="page-hero-strip">
+  <div class="page-hero-inner">
+    <div class="page-hero-eyebrow"><em>{{ country.name|upper }}</em> · City Guide</div>
+    <h1 class="page-hero-title">{{ page.title or (city.name ~ ' — Digital Nomad Guide') }}</h1>
+    {% if page.hero_subtitle %}
+    <p class="page-hero-subtitle">{{ page.hero_subtitle }}</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<main class="container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>›</span>
+    <a href="/{{ country.slug }}/">{{ country.name }}</a><span>›</span>
+    <span>{{ city.name }}</span>
+  </nav>
+
+  {% if page and page.body_html %}
+  <article><div class="body">{{ page.body_html|safe }}</div></article>
+  {% else %}
+  <article><div class="body"><p>{{ city.summary or '' }}</p><p><em>Full city guide generating — check back shortly.</em></p></div></article>
+  {% endif %}
+
+  {% if topics %}
+  <section class="cr-card-section" aria-label="Topic pages">
+    <header class="cr-card-header">
+      <h2 class="cr-card-title">{{ city.name }} deep dives</h2>
+      <span class="cr-card-meta">{{ topics|length }} topics</span>
+    </header>
+    <div class="cr-card-grid topic-card-grid">
+      {% for t in topics %}
+      <a class="cr-card topic-card" href="/{{ country.slug }}/{{ city.slug }}/{{ t.slug }}/">
+        <div class="topic-card-icon" aria-hidden="true">{{ topic_icon(t.slug, 22) }}</div>
+        <h3 class="cr-card-headline">{{ t.name }}</h3>
+        <p class="cr-card-tagline">{{ t.description or '' }}</p>
+        <span class="cr-card-cta">Read</span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if page and page.faq %}
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    {% for item in page.faq %}
+    <details {% if loop.first %}open{% endif %}>
+      <summary>{{ item.question }}</summary><p>{{ item.answer }}</p>
+    </details>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {% from "_cluster_nav.html.j2" import cluster_nav %}
+  {{ cluster_nav(cluster_ctx) }}
+</main>
+
+<style>
+  /* Topic cards lead with a colored icon disc, no region stripe.
+     The disc uses a tinted teal background so the icon reads well
+     and the card feels punchier than a plain text list. */
+  .topic-card .topic-card-icon {
+    width: 44px; height: 44px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 10px;
+    background: rgba(10, 77, 92, 0.08);
+    color: var(--sr-blue);
+    margin-bottom: 4px;
+  }
+  .topic-card:hover .topic-card-icon {
+    background: rgba(10, 77, 92, 0.14);
+    color: var(--sr-blue-dark);
+  }
+</style>
+{% endblock %}

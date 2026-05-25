@@ -1,0 +1,13 @@
+[
+  {"slug": "internet",         "name": "Internet & Connectivity", "display_order": 10, "icon": "wifi",        "description": "Download/upload speeds, latency, mobile data quality, and outage patterns for remote workers."},
+  {"slug": "housing",          "name": "Housing & Long-Stays",    "display_order": 20, "icon": "home",        "description": "Monthly rental prices, neighborhoods, lease vs Airbnb tradeoffs, and gotchas for long-stay nomads."},
+  {"slug": "safety",           "name": "Safety & Risk",           "display_order": 30, "icon": "shield",      "description": "Local crime patterns, scam profiles, neighborhood-level safety, and government travel advisories."},
+  {"slug": "banking",          "name": "Banking & Money",         "display_order": 40, "icon": "bank",        "description": "Opening accounts, ATM strategies, currency controls, parallel exchange rates, and remittance options."},
+  {"slug": "crypto",           "name": "Crypto & Web3",           "display_order": 50, "icon": "bitcoin",     "description": "On/off-ramp options, crypto-friendly banks, regulation, and Bitcoin-native infrastructure."},
+  {"slug": "visa",             "name": "Visas & Residency",       "display_order": 60, "icon": "passport",    "description": "Digital nomad visas, tourist visa duration, residency pathways, and renewal mechanics."},
+  {"slug": "cost-of-living",   "name": "Cost of Living",          "display_order": 70, "icon": "wallet",      "description": "Monthly budgets by category — rent, groceries, transport, dining, coworking, healthcare."},
+  {"slug": "coworking",        "name": "Coworking & Cafés",       "display_order": 80, "icon": "laptop",      "description": "Coworking space directories, wifi-strong cafés, monthly passes, and community quality."},
+  {"slug": "healthcare",       "name": "Healthcare",              "display_order": 90, "icon": "medical",     "description": "Hospital quality, expat-friendly clinics, insurance requirements, and emergency care."},
+  {"slug": "logistics",        "name": "Logistics & Daily Life",  "display_order": 100,"icon": "logistics",   "description": "Transit, SIM cards, deliveries, language friction, and the unglamorous daily-life details."},
+  {"slug": "scam-prevention",  "name": "Scam Prevention",         "display_order": 110,"icon": "warning",     "description": "Common scams targeting expats and nomads, reported by destination, with countermeasures."}
+]

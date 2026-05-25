@@ -1,0 +1,48 @@
+{% extends "_base.html.j2" %}
+
+{% block page_hero %}
+<section class="page-hero-strip">
+  <div class="page-hero-inner">
+    <div class="page-hero-eyebrow">Tool · <em>Coming soon</em></div>
+    <h1 class="page-hero-title">{{ tool.title }}</h1>
+    <p class="page-hero-subtitle">{{ tool.subtitle }}</p>
+  </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<main class="container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>›</span>
+    <a href="/tools/">Tools</a><span>›</span>
+    <span>{{ tool.title }}</span>
+  </nav>
+
+  <article>
+    <div class="body">
+      <p>{{ tool.description }}</p>
+      <p><strong>Status:</strong> Under construction. Subscribe below to be notified when it ships.</p>
+    </div>
+  </article>
+
+  {% if related_countries %}
+    {% from "_card_grid.html.j2" import card_grid_section %}
+    {% set _cards = [] %}
+    {% for c in related_countries %}
+      {% set _ = _cards.append({
+        'href': '/' ~ c.slug ~ '/',
+        'eyebrow': 'DESTINATION',
+        'title': c.name,
+        'tagline': c.summary or '',
+        'cta': 'Explore'
+      }) %}
+    {% endfor %}
+    {{ card_grid_section(heading='In the meantime — explore destinations', cards=_cards, aria_label='Featured destinations', max_cards=6) }}
+  {% endif %}
+
+  {% if cluster_ctx is defined and cluster_ctx and cluster_ctx.cluster %}
+    {% from "_cluster_nav.html.j2" import cluster_nav %}
+    {{ cluster_nav(cluster_ctx) }}
+  {% endif %}
+</main>
+{% endblock %}

@@ -1,0 +1,128 @@
+{% extends "_base.html.j2" %}
+{% from "_icons.html.j2" import topic_icon, ui_icon %}
+
+{% block page_hero %}
+<section class="page-hero-strip">
+  <div class="page-hero-inner">
+    <div class="page-hero-topic-mark" aria-hidden="true">{{ topic_icon(topic.slug, 28) }}</div>
+    <div class="page-hero-eyebrow"><em>{{ topic.name|upper }}</em> · Ranking</div>
+    <h1 class="page-hero-title">{{ topic.name }} Rankings</h1>
+    <p class="page-hero-subtitle">{{ topic.description }}</p>
+  </div>
+</section>
+<style>
+  .page-hero-topic-mark {
+    width: 56px; height: 56px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #ffd4b8;
+    margin: 0 auto 14px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>›</span>
+    <a href="/rankings/">Rankings</a><span>›</span>
+    <span>{{ topic.name }}</span>
+  </nav>
+
+  <section class="ranking-table-section" aria-label="{{ topic.name }} ranking table">
+    <header class="cr-card-header">
+      <h2 class="cr-card-title">{{ topic.name }} ranking</h2>
+      <span class="cr-card-meta">{{ rankings|length }} destinations</span>
+    </header>
+
+    <table class="ranking-table">
+      <thead>
+        <tr>
+          <th class="rank-col">#</th>
+          <th>Destination</th>
+          <th class="region-col">Region</th>
+          {% for col in extra_columns %}
+          <th class="metric-col">{{ col }}</th>
+          {% endfor %}
+          <th class="cta-col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in rankings %}
+        <tr>
+          <td class="rank-col"><span class="rank-badge">{{ loop.index }}</span></td>
+          <td>
+            <a class="ranking-row-link" href="{{ r.detail_url }}">
+              <strong>{{ r.name }}</strong>
+              {% if r.parent_name %}<span class="row-parent">in {{ r.parent_name }}</span>{% endif %}
+            </a>
+          </td>
+          <td class="region-col">
+            {% if r.region %}<span class="region-pill region-{{ r.region }}">{{ r.region|replace('-', ' ')|title }}</span>{% endif %}
+          </td>
+          {% for cell in r.cells %}
+          <td class="metric-col">{{ cell|safe }}</td>
+          {% endfor %}
+          <td class="cta-col"><a href="{{ r.detail_url }}">View →</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  {# Methodology appears UNDER the ranking on every page — explanatory
+     context follows the data, not the other way around. #}
+  {% if methodology %}
+  <section class="ranking-methodology">
+    <h2 class="ranking-section-h">Methodology</h2>
+    <p>{{ methodology }}</p>
+  </section>
+  {% endif %}
+
+  {% from "_cluster_nav.html.j2" import cluster_nav %}
+  {{ cluster_nav(cluster_ctx) }}
+</main>
+
+<style>
+  .ranking-methodology { margin: 32px 0; padding: 18px 22px; background: var(--sr-gray-bg); border-left: 3px solid var(--sr-blue); border-radius: 4px; }
+  .ranking-methodology h2 { font-family: var(--font-serif); font-size: 14px; text-transform: uppercase; letter-spacing: 1.4px; color: var(--sr-blue-dark); margin: 0 0 8px; }
+  .ranking-methodology p { font-size: 14px; color: var(--sr-dark-text); margin: 0; line-height: 1.55; }
+
+  .ranking-table-section { margin: 32px 0; }
+  /* table-layout: fixed lets us pin column widths explicitly so the
+     destination column doesn't expand to absorb all the slack. */
+  .ranking-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-family: var(--font-sans); table-layout: fixed; }
+  .ranking-table thead { background: var(--sr-gray-bg); border-bottom: 2px solid var(--sr-blue); }
+  .ranking-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--sr-gray-text); padding: 12px 10px; text-align: left; }
+  .ranking-table td { padding: 14px 10px; border-bottom: 1px solid var(--sr-gray-light); font-size: 14.5px; vertical-align: middle; }
+  .ranking-table tr:hover td { background: rgba(10, 77, 92, 0.03); }
+  /* Column widths as % of the table so proportions stay stable regardless
+     of container width. Sums to 100%. */
+  .ranking-table .rank-col { width: 8%; text-align: center; }
+  .ranking-table th:nth-child(2),
+  .ranking-table td:nth-child(2) { width: 30%; }
+  .ranking-table .region-col { width: 22%; }
+  .ranking-table .metric-col { width: 24%; white-space: nowrap; }
+  .ranking-table .cta-col { width: 16%; text-align: right; white-space: nowrap; }
+  .rank-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; padding: 0 8px; border-radius: 14px; background: var(--sr-blue-dark); color: var(--white); font-weight: 700; font-size: 13px; }
+  .ranking-row-link { color: var(--sr-blue-dark); text-decoration: none; }
+  .ranking-row-link:hover { color: var(--sr-red); }
+  .ranking-row-link strong { font-family: var(--font-serif); font-size: 15px; font-weight: 700; }
+  .row-parent { color: var(--sr-gray-text); font-size: 13px; margin-left: 6px; }
+  .region-pill { display: inline-block; padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 600; background: var(--region-color, var(--sr-gray-bg)); color: white; }
+  .region-pill.region-latin-america  { background: var(--region-latin-america); }
+  .region-pill.region-balkans        { background: var(--region-balkans); }
+  .region-pill.region-caucasus       { background: var(--region-caucasus); }
+  .region-pill.region-central-asia   { background: var(--region-central-asia); }
+  .region-pill.region-southeast-asia { background: var(--region-southeast-asia); }
+  .cta-col a { color: var(--sr-blue); font-weight: 600; font-size: 13px; text-decoration: none; }
+  .cta-col a:hover { color: var(--sr-red); }
+  @media (max-width: 700px) {
+    .ranking-table { font-size: 13px; }
+    .ranking-table .region-col, .ranking-table .metric-col { display: none; }
+    .ranking-table th, .ranking-table td { padding: 10px 6px; }
+  }
+</style>
+{% endblock %}

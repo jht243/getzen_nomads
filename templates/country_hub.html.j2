@@ -1,0 +1,88 @@
+{% extends "_base.html.j2" %}
+{% from "_icons.html.j2" import topic_icon, ui_icon %}
+
+{% block page_hero %}
+<section class="page-hero-strip">
+  <div class="page-hero-inner">
+    <div class="page-hero-eyebrow"><em>{{ country.region|replace('-', ' ')|upper if country.region else 'DESTINATION' }}</em> · Country Hub</div>
+    <h1 class="page-hero-title">{{ page.title or (country.name ~ ' — Digital Nomad Guide') }}</h1>
+    {% if page.hero_subtitle %}
+    <p class="page-hero-subtitle">{{ page.hero_subtitle }}</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<main class="container">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>›</span><span>{{ country.name }}</span>
+  </nav>
+
+  {% if page and page.body_html %}
+  <article><div class="body">{{ page.body_html|safe }}</div></article>
+  {% else %}
+  <article>
+    <div class="body">
+      <p>{{ country.summary or '' }}</p>
+      <p><em>Full country guide generating — check back shortly. In the meantime, browse cities below.</em></p>
+    </div>
+  </article>
+  {% endif %}
+
+  {% if cities %}
+  <section class="cr-card-section" aria-label="Cities">
+    <header class="cr-card-header">
+      <h2 class="cr-card-title">Cities in {{ country.name }}</h2>
+      <span class="cr-card-meta">{{ cities|length }} {{ 'city' if cities|length == 1 else 'cities' }}</span>
+    </header>
+    <div class="cr-card-grid">
+      {% for c in cities %}
+      <a class="cr-card region-card region-{{ country.region }}" href="/{{ country.slug }}/{{ c.slug }}/">
+        <span class="cr-card-eyebrow">{{ ui_icon('map-pin', 11) }} City Guide</span>
+        <h3 class="cr-card-headline">{{ c.name }}</h3>
+        <p class="cr-card-tagline">{{ c.summary or ('Practical ' ~ c.name ~ ' nomad intel — visa, cost, internet, and safety.') }}</p>
+        <span class="cr-card-cta">Read guide</span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if page and page.faq %}
+  <section class="faq" aria-label="Frequently asked questions">
+    <h2>Frequently asked questions</h2>
+    {% for item in page.faq %}
+    <details {% if loop.first %}open{% endif %}>
+      <summary>{{ item.question }}</summary>
+      <p>{{ item.answer }}</p>
+    </details>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {% from "_cluster_nav.html.j2" import cluster_nav %}
+  {{ cluster_nav(cluster_ctx) }}
+
+  {# Briefings rail — lowest-priority surface on the country hub. Compact
+     list, no cards, sits below cluster nav. #}
+  {% if briefings %}
+  <section class="cr-rail-section" aria-label="Recent briefings on {{ country.name }}">
+    <header class="cr-rail-header">
+      <h2 class="cr-rail-title">Recent {{ country.name }} briefings</h2>
+      <a class="cr-rail-link" href="/briefings/">All briefings →</a>
+    </header>
+    <ul class="cr-rail-list">
+      {% for b in briefings[:3] %}
+      <li class="cr-rail-item">
+        <a href="/briefings/{{ b.slug }}">
+          <span class="cr-rail-tag">{{ country.name|upper }}</span>
+          <span class="cr-rail-title-text">{{ b.title }}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+</main>
+{% endblock %}

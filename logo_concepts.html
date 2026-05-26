@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Get ZEN — Airplane logo</title>
+<style>
+  :root {
+    --sr-red: #c5532b;
+    --sr-nav: #0f2730;
+    --white: #ffffff;
+  }
+  body { margin: 0; font-family: -apple-system, system-ui, sans-serif; background: #1a2e36; color: #e9eef0; }
+  header { padding: 32px 40px 8px; }
+  header h1 { font-size: 1.4rem; margin: 0 0 4px; font-weight: 600; }
+  header p { margin: 0; opacity: 0.65; font-size: 0.9rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 20px; padding: 24px 40px 60px; }
+  .card { background: #0f1f26; border: 1px solid #25404a; border-radius: 10px; padding: 22px; }
+  .card h2 { font-size: 0.95rem; margin: 0 0 4px; font-weight: 600; }
+  .card .desc { font-size: 0.8rem; opacity: 0.6; margin: 0 0 18px; }
+
+  /* mimic site nav */
+  .top-nav { background-color: var(--sr-nav); color: var(--white); padding: 14px 16px; border-radius: 8px; }
+  .nav-brand { font-family: Georgia, serif; font-size: 1.25rem; font-weight: 700; letter-spacing: 0.5px; color: var(--white); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; line-height: 1; }
+  .nav-brand .brand-name { display: inline-flex; align-items: baseline; gap: 0.18em; }
+  .nav-brand .brand-mark { width: 30px; height: 30px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; background: var(--sr-red); border-radius: 6px; }
+  .nav-brand .brand-mark svg { width: 20px; height: 20px; display: block; }
+
+  .sizes { display: flex; align-items: center; gap: 20px; padding: 18px 4px 0; }
+  .size-frame { display: inline-flex; align-items: center; justify-content: center; background: var(--sr-red); border-radius: 6px; }
+  .size-frame.lg { width: 80px; height: 80px; border-radius: 14px; }
+  .size-frame.lg svg { width: 54px; height: 54px; }
+  .size-frame.md { width: 48px; height: 48px; border-radius: 9px; }
+  .size-frame.md svg { width: 32px; height: 32px; }
+  .size-frame.sm { width: 22px; height: 22px; border-radius: 5px; }
+  .size-frame.sm svg { width: 16px; height: 16px; }
+
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding-top: 8px; }
+  .compare .col { padding: 14px; background: #0a161b; border-radius: 8px; }
+  .compare .col small { display: block; font-size: 0.7rem; opacity: 0.5; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  .old-brand { font-family: Georgia, serif; font-size: 1.25rem; font-weight: 700; color: white; display: inline-flex; align-items: center; gap: 12px; }
+  .old-brand .om { width: 30px; height: 30px; background: var(--sr-red); border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-family: -apple-system, sans-serif; font-size: 14px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Get ZEN — paper-plane mark</h1>
+  <p>Updated logo: paper-airplane icon (replacing the "Z") and tightened spacing between "Get" and "ZEN".</p>
+</header>
+
+<div class="grid">
+
+  <div class="card">
+    <h2>In the navbar (live)</h2>
+    <p class="desc">Exactly what now ships in templates/_base.html.j2 — same colors, same font-family.</p>
+    <div class="top-nav">
+      <a class="nav-brand" href="#">
+        <span class="brand-mark">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M4 17 L27 6 L20 27 L15 19 Z" fill="#ffffff"/>
+            <path d="M15 19 L27 6" stroke="#c5532b"/>
+          </svg>
+        </span>
+        <span class="brand-name"><span>Get</span><span>ZEN</span></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Before / after</h2>
+    <p class="desc">Old "Z" letter + wide space vs. new paper-plane + tightened wordmark.</p>
+    <div class="compare">
+      <div class="col">
+        <small>Before</small>
+        <span class="old-brand"><span class="om">Z</span>Get ZEN</span>
+      </div>
+      <div class="col">
+        <small>After</small>
+        <a class="nav-brand" href="#">
+          <span class="brand-mark">
+            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M4 17 L27 6 L20 27 L15 19 Z" fill="#ffffff"/>
+              <path d="M15 19 L27 6" stroke="#c5532b"/>
+            </svg>
+          </span>
+          <span class="brand-name"><span>Get</span><span>ZEN</span></span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Mark at multiple sizes</h2>
+    <p class="desc">22px (favicon), 30px (navbar), 48px, 80px (hero / social).</p>
+    <div class="sizes">
+      <span class="size-frame sm"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M4 17 L27 6 L20 27 L15 19 Z" fill="#ffffff"/></svg></span>
+      <span class="size-frame" style="width:30px;height:30px;border-radius:6px;"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" style="width:20px;height:20px;"><path d="M4 17 L27 6 L20 27 L15 19 Z" fill="#ffffff"/><path d="M15 19 L27 6" stroke="#c5532b"/></svg></span>
+      <span class="size-frame md"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M4 17 L27 6 L20 27 L15 19 Z" fill="#ffffff"/><path d="M15 19 L27 6" stroke="#c5532b"/></svg></span>
+      <span class="size-frame lg"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M4 17 L27 6 L20 27 L15 19 Z" fill="#ffffff"/><path d="M15 19 L27 6" stroke="#c5532b"/></svg></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>On light background</h2>
+    <p class="desc">Sanity check for social cards / email signatures.</p>
+    <div style="background:#f6efe3; padding:22px; border-radius:8px; display:flex; align-items:center; gap:8px;">
+      <span style="width:30px;height:30px;background:#c5532b;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" style="width:20px;height:20px;"><path d="M4 17 L27 6 L20 27 L15 19 Z" fill="#ffffff"/><path d="M15 19 L27 6" stroke="#c5532b"/></svg>
+      </span>
+      <span style="font-family:Georgia,serif;font-weight:700;font-size:1.25rem;color:#0f1f26;display:inline-flex;gap:0.18em;"><span>Get</span><span>ZEN</span></span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

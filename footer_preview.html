@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Get ZEN — Footer preview</title>
+<style>
+  :root {
+    --sr-blue-dark: #14323f;
+    --sr-gray-bg: #f6efe3;
+    --sr-gray-light: #d9d2c5;
+    --sr-gray-text: #4a5560;
+    --sr-blue: #2a6f8a;
+    --sr-red: #c5532b;
+    --white: #ffffff;
+    --font-serif: Georgia, 'Times New Roman', serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  html, body { margin: 0; padding: 0; background: #1a2e36; font-family: var(--font-sans); color: #e9eef0; }
+  .frame-label { padding: 28px 40px 8px; font-size: 0.9rem; opacity: 0.65; }
+  .frame { background: var(--white); color: var(--sr-gray-text); margin: 0 40px 40px; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+  .page-stub { padding: 80px 24px; text-align: center; color: var(--sr-gray-text); font-family: var(--font-serif); }
+  .page-stub h2 { color: var(--sr-blue-dark); margin: 0 0 8px; }
+
+  /* --- copied from _base.html.j2 footer styles --- */
+  .footer-cta { background: var(--sr-gray-bg); border-top: 1px solid var(--sr-gray-light); padding: 32px 24px; text-align: center; margin-top: 64px; }
+  .footer-cta h2 { font-family: var(--font-serif); color: var(--sr-blue-dark); margin-bottom: 8px; font-size: 22px; font-weight: 700; }
+  .footer-cta p { color: var(--sr-gray-text); margin-bottom: 16px; }
+  .footer-cta a.btn { display: inline-block; background: var(--sr-red); color: var(--white); padding: 10px 24px; border-radius: 3px; text-decoration: none; font-weight: 600; font-size: 14px; letter-spacing: 0.5px; text-transform: uppercase; }
+
+  .site-footer { background: var(--sr-blue-dark); color: rgba(255,255,255,0.7); padding: 24px 24px 16px; text-align: center; font-size: 13px; }
+  .site-footer a { color: rgba(255,255,255,0.85); text-decoration: none; margin: 0 8px; }
+  .footer-attribution { margin-top: 14px; font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 0.04em; }
+  .footer-attribution a { color: rgba(255,255,255,0.5); text-decoration: none; margin: 0; }
+  .footer-attribution a:hover { color: rgba(255,255,255,0.8); }
+
+  .zoom-note { padding: 0 40px 30px; font-size: 0.8rem; opacity: 0.55; }
+  .zoom { background: var(--sr-blue-dark); padding: 60px 40px 40px; text-align: center; margin: 0 40px 40px; border-radius: 8px; }
+  .zoom .site-footer { background: transparent; padding: 0; }
+</style>
+</head>
+<body>
+
+<div class="frame-label">1 · Full footer in page context (exactly as it ships)</div>
+<div class="frame">
+  <div class="page-stub">
+    <h2>… end of an article page …</h2>
+    <p>(page body would be above this)</p>
+  </div>
+
+  <div class="footer-cta">
+    <h2>Get the weekly briefing</h2>
+    <p>Rankings updates, visa changes, and new country guides — every Tuesday.</p>
+    <a class="btn" href="#">Subscribe</a>
+  </div>
+
+  <footer class="site-footer">
+    &copy; 2026 Get ZEN ·
+    <a href="#">Sitemap</a> ·
+    <a href="#">Briefings</a> ·
+    <a href="#">Rankings</a> ·
+    <a href="#">Guides</a> ·
+    <a href="#">Resources</a> ·
+    <a href="#">About</a>
+    <div class="footer-attribution">Powered by <a href="https://www.layer3labs.io" rel="noopener" target="_blank">Layer3Labs</a></div>
+  </footer>
+</div>
+
+<div class="zoom-note">2 · Zoom-in on the footer alone (so you can judge the "subtle" feel of the attribution)</div>
+<div class="zoom">
+  <footer class="site-footer">
+    &copy; 2026 Get ZEN ·
+    <a href="#">Sitemap</a> ·
+    <a href="#">Briefings</a> ·
+    <a href="#">Rankings</a> ·
+    <a href="#">Guides</a> ·
+    <a href="#">Resources</a> ·
+    <a href="#">About</a>
+    <div class="footer-attribution">Powered by <a href="https://www.layer3labs.io" rel="noopener" target="_blank">Layer3Labs</a></div>
+  </footer>
+</div>
+
+</body>
+</html>
